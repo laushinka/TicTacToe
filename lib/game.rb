@@ -22,6 +22,7 @@
 require_relative 'board.rb'
 require_relative 'computer.rb'
 require_relative 'person.rb'
+require 'pry'
 
 class Game
   attr_accessor :board, :person, :computer # Don't know why readers
@@ -52,12 +53,13 @@ class Game
 
   def run_game
     while !board.over?
-      person.choose_move # This won't stop
+      person.choose_move
       board.update_board(person.move, person.mark)
       display_board
       board.winner
       computer.makes_move(board)
       board.update_board(computer.move, computer.mark)
+      display_board
       board.winner
     end
     puts "Game Over!"
