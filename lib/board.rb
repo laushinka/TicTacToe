@@ -7,7 +7,7 @@
 #   Square
 #   - Is it empty? If not, knows the value
 class Board
-  attr_reader :grid # Can be updated with reader, but not reassign (accessor).
+  attr_reader :grid, :correct_input # Can be updated with reader, but not reassign (accessor).
 
 WINNING_COMBINATIONS = [
    [0,1,2],
@@ -26,6 +26,7 @@ WINNING_COMBINATIONS = [
   end
 
 # - Did anyone win?
+# Checks if any of the sets in the winning combinations are all the same as the marks
   def winner
     marks = [:x, :o] # To make going through the variables easier
     WINNING_COMBINATIONS.each do |combo| # Go through combinations
@@ -65,7 +66,8 @@ WINNING_COMBINATIONS = [
 
   def over?
     # Checks if anyone wins || if the board is full
-      !winner.nil? || full?
+      winner || full? # !winner.nil? is the same as winner
+      # binding.pry
   end
 
 end

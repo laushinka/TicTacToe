@@ -1,12 +1,13 @@
-require_relative 'board.rb'
-require_relative 'computer.rb'
-require_relative 'person.rb'
+# - Initializes with:
+  # - a board instance
+  # - a person instance
+  # - a computer instance
+  # - assigns the mark for the computer
 
-# - Ask person for name
-# - Ask person for side
-# - Assign computer its side
-# - Print out the board
-# Loop until someone wins or board is full
+# - Displays the board
+
+# - RUN GAME
+  # Loop until someone wins or board is full
 #   - Ask person for move
 #     - Check if move is valid? If available, marks the board
 #        If not available, ask the person to try again
@@ -15,11 +16,12 @@ require_relative 'person.rb'
 #   - Check for winner or board is full
 #   - If no winner && board is not full, continue
 #   - Break out
-# - Tell person result of game
-# - Tell person of score
+  # Tell person result of game
+  # Tell person of score
 
-my_game = Game.new
-my_game.board.update_board(stuff)
+require_relative 'board.rb'
+require_relative 'computer.rb'
+require_relative 'person.rb'
 
 class Game
   attr_accessor :board, :person, :computer # Don't know why readers
@@ -48,7 +50,26 @@ class Game
    puts "3 #{board.grid[6] || " "} | #{board.grid[7] || " "} | #{board.grid[8] || " "} "
   end
 
+  def run_game
+    while !board.over?
+      person.choose_move # This won't stop
+      board.update_board(person.move, person.mark)
+      display_board
+      board.winner
+      computer.makes_move(board)
+      board.update_board(computer.move, computer.mark)
+      board.winner
+    end
+    puts "Game Over!"
+  end
+
+  def score
+
+  end
+
 end
 
 game = Game.new
-game.display_board
+game.run_game
+
+# Pry.start
