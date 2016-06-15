@@ -6,8 +6,10 @@
   # - Is the board full?
 #   Square
 #   - Is it empty? If not, knows the value
+require 'pry'
+
 class Board
-  attr_reader :grid, :correct_input # Can be updated with reader, but not reassign (accessor).
+  attr_reader :grid, :correct_input, :winner, :who_won # Can be updated with reader, but not reassign (accessor).
 
 WINNING_COMBINATIONS = [
    [0,1,2],
@@ -28,26 +30,36 @@ WINNING_COMBINATIONS = [
 # - Did anyone win?
 # Checks if any of the sets in the winning combinations are all the same as the marks
   def winner
-    marks = [:x, :o] # To make going through the variables easier
+    marks = ["X", "O"] # To make going through the variables easier
     WINNING_COMBINATIONS.each do |combo| # Go through combinations
-      marks.find do |mark| # Go through marks
-        combo.all? do |space| # Go through all of combo
-          mark == space # If mark equals space, true
+      marks.each do |mark| # Go through marks
+        if combo.all? {|space| mark == @grid[space] } # If mark equals space, true
+          return mark
         end
       end
     end
-    nil # Each returns nil
+    nil
   end
+  #
+  # def who_won
+  #   if winner == true
+  #     puts "win"
+  #     # @who_won = Person.name
+  #   end
+  # end
 
   def update_board(square, mark)
-    if empty?(square) # Passes this line to the #empty? method
-      @grid[square] = mark # Reassign mark to the square in the grid
-    else
-      puts "That space is occupied. Please choose another one."
-      new_square = gets.chomp
-      update_board(new_square, mark) # Recursion, bitch!
+    unless full? # Without this, the #empty? method gives a nil result when it's full, and the game breaks
+      if empty?(square)
+        @grid[square] = mark # Reassign mark to the square in the grid
+      else
+        puts "That space is occupied. Please choose another one."
+        new_square = gets.chomp
+        update_board(new_square, mark) # Recursion, bitch!
+      end
     end
   end
+
   # - Is there a tie?
   def tie?
     winner.nil? && full?
