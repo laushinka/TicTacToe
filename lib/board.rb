@@ -40,13 +40,13 @@ WINNING_COMBINATIONS = [
     end
     nil
   end
-  #
-  # def who_won
-  #   if winner == true
-  #     puts "win"
-  #     # @who_won = Person.name
-  #   end
-  # end
+
+  def who_won
+    if winner
+      puts "Win"
+      # @who_won = Person.name
+    end
+  end
 
   def update_board(square, mark)
     unless full? # Without this, the #empty? method gives a nil result when it's full, and the game breaks
@@ -54,7 +54,7 @@ WINNING_COMBINATIONS = [
         @grid[square] = mark # Reassign mark to the square in the grid
       else
         puts "That space is occupied. Please choose another one."
-        new_square = gets.chomp
+        new_square = gets.chomp.to_i # Convert to integer or it wouldn't work
         update_board(new_square, mark) # Recursion, bitch!
       end
     end
