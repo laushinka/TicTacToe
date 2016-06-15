@@ -71,11 +71,6 @@ class Game
     # puts "Game Over!"
   end
 
-  def round
-
-  end
-end
-
 game = Game.new
 game.run_game
 
