@@ -64,7 +64,9 @@ class Game
       computer.makes_move(board)
       board.update_board(computer.move, computer.mark)
       display_board
-      board.winner
+      if board.winner
+        break
+      end
     end
     puts "Game Over!"
   end
