@@ -58,12 +58,13 @@ class Game
       person.choose_move
       board.update_board(person.move, person.mark)
       display_board
-      board.winner
+      if board.winner
+        break
+      end
       computer.makes_move(board)
       board.update_board(computer.move, computer.mark)
       display_board
       board.winner
-      # board.who_won
     end
     puts "Game Over!"
   end

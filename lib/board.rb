@@ -9,7 +9,7 @@
 require 'pry'
 
 class Board
-  attr_reader :grid, :correct_input, :winner, :who_won, :marks # Can be updated with reader, but not reassign (accessor).
+  attr_reader :grid, :correct_input, :winner, :who_won, :marks, :player_win # Can be updated with reader, but not reassign (accessor).
 
 WINNING_COMBINATIONS = [
    [0,1,2],
@@ -34,18 +34,16 @@ WINNING_COMBINATIONS = [
     WINNING_COMBINATIONS.each do |combo| # Go through combinations
       @marks.each do |mark| # Go through marks
         if combo.all? {|space| mark == @grid[space] } # If mark equals space, true
+          if mark == "X"
+            puts "Congrats! You win!"
+          else mark == "O"
+            puts "You suck." # Hmm this outputs twice
+          end
           return mark
         end
       end
     end
     nil
-  end
-
-  def who_won
-    if winner
-      puts "Win"
-      # @who_won = Person.name
-    end
   end
 
   def update_board(square, mark)
