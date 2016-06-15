@@ -9,7 +9,7 @@
 require 'pry'
 
 class Board
-  attr_reader :grid, :correct_input, :winner, :who_won # Can be updated with reader, but not reassign (accessor).
+  attr_reader :grid, :correct_input, :winner, :who_won, :marks # Can be updated with reader, but not reassign (accessor).
 
 WINNING_COMBINATIONS = [
    [0,1,2],
@@ -25,14 +25,14 @@ WINNING_COMBINATIONS = [
   def initialize
     # - Starts with a blank board with 9 spaces
     @grid = Array.new(9)
+    @marks = ["X", "O"] # Helps going through the players' marks
   end
 
 # - Did anyone win?
 # Checks if any of the sets in the winning combinations are all the same as the marks
   def winner
-    marks = ["X", "O"] # To make going through the variables easier
     WINNING_COMBINATIONS.each do |combo| # Go through combinations
-      marks.each do |mark| # Go through marks
+      @marks.each do |mark| # Go through marks
         if combo.all? {|space| mark == @grid[space] } # If mark equals space, true
           return mark
         end
@@ -70,8 +70,7 @@ WINNING_COMBINATIONS = [
     @grid.none? { |space| space.nil? }
   end
 
-# - Is it empty? If not, knows the value
-# To check if someone can make a move
+# To check if a square is empty for a player to make a move into 
   def empty?(square)
     @grid[square].nil?
   end
