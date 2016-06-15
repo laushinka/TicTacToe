@@ -13,7 +13,7 @@ class Board
 
 WINNING_COMBINATIONS = [
    [0,1,2],
-   [2,4,5],
+   [3,4,5],
    [6,7,8],
    [0,3,6],
    [1,4,7],
@@ -70,7 +70,7 @@ WINNING_COMBINATIONS = [
     @grid.none? { |space| space.nil? }
   end
 
-# To check if a square is empty for a player to make a move into 
+# To check if a square is empty for a player to make a move into
   def empty?(square)
     @grid[square].nil?
   end
