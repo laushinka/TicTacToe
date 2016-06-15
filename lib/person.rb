@@ -1,7 +1,7 @@
 # Initializes:
 #   - name
 class Person
-  attr_accessor :move, :name, :mark, :correct_input # Will need to change the move
+  attr_accessor :move, :name, :mark, :correct_input
 
   def initialize
     puts "What's your name?"
@@ -11,6 +11,7 @@ class Person
 
   end
 
+# Takes input and makes sure the input is valid
   def choose_move
       puts "Please choose a position to move to between 1-9."
       loop do
@@ -25,12 +26,6 @@ class Person
     end
   end
 
-    # def correct_input?(move)
-    #   @move = move
-    #   @move > 0 && @move < 10
-    #   # binding.pry
-    # end
-
   # def choose_move
   #   puts "Please choose a position to move to between 1-9."
   #   input = gets.chomp.to_i
@@ -41,5 +36,3 @@ class Person
   #     choose_move # Go back to the start of the method. # Recursion again, bitch!
   #   end
   # end
-
-# Not instance variable because we don't need to access it anywhere else yet
