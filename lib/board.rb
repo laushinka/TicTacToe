@@ -35,9 +35,9 @@ WINNING_COMBINATIONS = [
       @marks.each do |mark| # Go through marks
         if combo.all? {|space| mark == @grid[space] } # If mark equals space, true
           if mark == "X"
-            puts "Congrats! You win!"
+            puts "Congrats! You win!" # A tie results in a win :/
           else mark == "O"
-            puts "You suck." # Hmm this outputs twice
+            puts "You suck."
           end
           return mark
         end
@@ -59,8 +59,9 @@ WINNING_COMBINATIONS = [
   end
 
   # - Is there a tie?
-  def tie?
+  def tie? # Not working yet
     winner.nil? && full?
+    puts "It's a tie!"
   end
 
 # - Is the board full?

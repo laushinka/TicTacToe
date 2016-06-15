@@ -51,8 +51,6 @@ class Game
    puts "3 #{board.grid[6] || " "} | #{board.grid[7] || " "} | #{board.grid[8] || " "} "
    puts " ___________"
 
-  end
-
   def run_game
     while !board.over?
       person.choose_move
