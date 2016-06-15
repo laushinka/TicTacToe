@@ -36,7 +36,7 @@ class Game
   end
 
   def choose_mark
-    if @person.mark == "X" # Can access .mark because it's accessor in Person class
+    if @person.mark == "X" # Can access .mark because it's attr_accessor in Person class
       @computer.mark = "O"
     else
       @computer.mark = "X"
@@ -49,6 +49,8 @@ class Game
    puts "2 #{board.grid[3] || " "} | #{board.grid[4] || " "} | #{board.grid[5] || " "} "
    puts " -----------"
    puts "3 #{board.grid[6] || " "} | #{board.grid[7] || " "} | #{board.grid[8] || " "} "
+   puts " ___________"
+
   end
 
   def run_game
@@ -61,14 +63,14 @@ class Game
       board.update_board(computer.move, computer.mark)
       display_board
       board.winner
+      # board.who_won
     end
     puts "Game Over!"
   end
 
-  def score
+  def round
 
   end
-
 end
 
 game = Game.new
